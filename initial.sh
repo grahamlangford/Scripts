@@ -10,5 +10,8 @@ sudo apt install -y vim
 echo installing curl
 sudo apt install -y curl
 
+echo installing build-essential
+sudo apt-get install -y build-essential
+
 echo installing gnome-tweak-tool
 sudo apt-get install -y gnome-tweak-tool
