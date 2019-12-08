@@ -1,17 +1,13 @@
-echo Fetching vscode
-curl -o code.deb -L http://go.microsoft.com/fwlink/?LinkID=760868
+echo updating packages index & installing dependencies
+sudo apt update
+sudo apt install software-properties-common apt-transport-https wget
 
-echo installing vscode
-sudo dpkg -i code.deb
+echo importing Microsoft GPG key
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
 
-echo installing extensions
-VSC_EXT_DIR=~/.vscode/extensions
-mkdir -p $VSC_EXT_DIR
-code --user-data-dir=$VSC_CONF_DIR \
-    --extensions-dir=$VSC_EXT_DIR \
-    --install-extension=dbaeumer.vscode-eslint \
-    --install-extension=esbenp.prettier-vscode \
-    --install-extension=jakob101.relativepath
+echo enabling VS Code repo
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 
-echo cleaning up
-rm code.deb
+echo installing latest VS Code
+sudo apt update
+sudo apt install code
